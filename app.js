@@ -14,6 +14,7 @@ const Body = require('koa-better-body');//表单处理模块
 const Path = require('path');//地址处理模块
 const Session  = require('koa-session');//SESSION处理模块
 const Fs = require('fs');//文件处理
+const Ejs = require('koa-ejs');//模板渲染
 
 
 const app = new Koa();
@@ -36,6 +37,16 @@ app.use(Session({
 
 //数据库
 app.context.db = require('./libs/database');//把自定义的数据库查询模块得到的数据库查询query方法绑定道app.context的db属性
+
+//模板渲染
+Ejs(app,{
+    root:Path.resolve(__dirname,'template'),
+    layout:false,
+    viewExt:'html',
+    cache:false,
+    debug:false,
+});
+
 
 //统一处理
 app.use(async (ctx,next)=>{

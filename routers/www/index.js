@@ -11,7 +11,6 @@ let router = new KoaRouter();
 
 router.all('/',async (ctx,next)=>{
     ctx.body = "前台首页";
-    dkdkdkd
 })
 
 router.all('/login',async (ctx,next)=>{

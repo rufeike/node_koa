@@ -14,13 +14,8 @@ router.all('/',async (ctx,next)=>{
     ctx.body = "我是后台首页";
 })
 
-router.get('/login',async (ctx,next)=>{
-    await ctx.render('admin/login');//使用Ejs渲染
-})
+router.use('/login',require('./login'));
 
-router.post('/login',async (ctx,next)=>{
-    ctx.body = "我是后台post提交";
-})
 
 module.exports = router.routes();
 

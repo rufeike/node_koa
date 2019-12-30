@@ -15,12 +15,15 @@
 - koa-router 路由模块
 - koa-ejs 模板渲染模块
 - koa-session SESSION处理模块
-- koa-better-body 表单处理模块
+- koa-better-body 表单处理模块 
+    - get的参数绑点在ctx.request.params
+    - post表单提交参数绑定在ctx.request.fields上(含文件)
 - mysql mysql数据库模块
 - co-mysql mysql数库封装同步模块
+- await-fs 同步处理的的fs模块
 
 ```shell
-npm install koa koa-static koa-router koa-ejs koa-session koa-better-body mysql co-mysql -D
+npm install koa koa-static koa-router koa-ejs koa-session koa-better-body mysql co-mysql await-fs -D
 ```
 
 ## 目录结构
@@ -34,6 +37,9 @@ npm install koa koa-static koa-router koa-ejs koa-session koa-better-body mysql 
 │  └─...
 ├─routers               路由相关模块（controller）
 │  ├─admin              后台路由文件目录
+│  │  ├─login           登录模块文件目录
+│  │  │  ├─index.js     登录路由默认加载模块文件
+│  │  │  └─...
 │  │  ├─index.js        后台路由默认加载模块文件 
 │  │  └─...
 │  ├─api                接口路由文件目录

@@ -53,6 +53,7 @@ app.use(async (ctx,next)=>{
     try{
         await next();
     }catch(e){
+        console.log(e);
         ctx.status = 500;
         ctx.body = 'Internaal Server Error';
     }

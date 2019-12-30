@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "await-fs": "^1.0.0",
     "co-mysql": "^1.0.0",
     "koa": "^2.11.0",
     "koa-better-body": "^3.2.0",

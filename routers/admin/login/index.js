@@ -14,7 +14,7 @@ let router = new KoaRouter();
 
 router.get('/',async (ctx,next)=>{
     // console.log(ctx.url);
-    await ctx.render('admin/login');//使用Ejs渲染
+    await ctx.render('admin/login',{title:'标题'});//使用Ejs渲染
 })
 
 router.post('/',async (ctx,next)=>{

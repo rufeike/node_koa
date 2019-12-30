@@ -6,9 +6,14 @@
  * @Email: rufeike@163.com
  */
 module.exports = {
+    //数据库相关
     DB_HOST:'localhost',
     DB_PORT:3306,
     DB_USER:'root',
     DB_PWD:'root',
     DB_NAME:'image',
+
+    //http相关
+    HTTP_PORT:8888,
+    HTTP_ROOT:'http://localhost:8888'
 };

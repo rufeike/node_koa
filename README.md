@@ -83,6 +83,26 @@ npm install koa koa-static koa-router koa-ejs koa-session koa-better-body mysql 
 ### routers目录
 >用于存储路由文件（类似php框架中的controller）目录
 
+#### index.js文件
+>自定义模块引入，与后台admin默认加载`index.js`文件为例
+
+代码：
+```js
+'use strict'
+const KoaRouter = require('koa-router');
+let router = new KoaRouter();
+
+//默认后台首页
+router.all('/',async (ctx,next)=>{
+    ctx.body = "我是后台首页";
+})
+
+router.use('/login',require('./login'));
+
+
+module.exports = router.routes();
+```
+
 #### static.js文件
 >自定义静态文件加载规则，用于定义静态文件加载规则，如图片、css、js、html等文件的缓存时间等
 
@@ -144,6 +164,35 @@ module.exports = function(router,options){
 
 ### template目录
 >渲染模板文件目录（类似php框架中的view）目录，主要配合`koa-ejs`进行使用
+
+- koa-ejs注册
+```js
+const Ejs = require('koa-ejs');
+//模板渲染
+Ejs(app,{
+    root:Path.resolve(__dirname,'template'),
+    layout:false,
+    viewExt:'html',
+    cache:false,
+    debug:false,
+});
+```
+
+- koa-ejs调用
+```js
+router.get('/',async (ctx,next)=>{
+    // console.log(ctx.url);
+    await ctx.render('admin/login',{
+        title:'登录'//模板传参
+    });//使用Ejs渲染
+})
+```
+
+- koa-ejs模板调用
+```html
+<%=title%>
+```
+
 
 ### upload目录
 >系统需要权限控制上传文件目录
@@ -221,11 +270,16 @@ app.use(router.routes());//挂载路由
 内容：
 ```js
 module.exports = {
+    //数据库相关
     DB_HOST:'localhost',
     DB_PORT:3306,
     DB_USER:'root',
     DB_PWD:'root',
     DB_NAME:'image',
+
+    //http相关
+    HTTP_PORT:8888,
+    HTTP_ROOT:'http://localhost:8888'
 };
 ```
 

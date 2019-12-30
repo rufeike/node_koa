@@ -15,11 +15,12 @@ const Path = require('path');//地址处理模块
 const Session  = require('koa-session');//SESSION处理模块
 const Fs = require('fs');//文件处理
 const Ejs = require('koa-ejs');//模板渲染
+const Config = require('./config');//引入自定义配置文件
 
 
 const app = new Koa();
-app.listen(8888,()=>{//监听端口
-    console.log("Server 8888 is running...");
+app.listen(Config.HTTP_PORT,()=>{//监听端口
+    console.log(`Server ${Config.HTTP_PORT} is running...`);
 })
 
 //中间件引入
@@ -37,6 +38,9 @@ app.use(Session({
 
 //数据库
 app.context.db = require('./libs/database');//把自定义的数据库查询模块得到的数据库查询query方法绑定道app.context的db属性
+
+//把配置文件加载道ctx.context.config中
+app.context.config = Config;
 
 //模板渲染
 Ejs(app,{
